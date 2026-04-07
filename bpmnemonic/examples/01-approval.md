@@ -1,0 +1,212 @@
+# Example 1: Simple expense approval → both outputs
+
+A small process with one pool, two lanes, three tasks, one gateway, two end states. The smallest interesting case.
+
+## The BPMN source
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL">
+  <bpmn:process id="Process_Expense" name="Expense Approval">
+    <bpmn:laneSet>
+      <bpmn:lane id="Lane_Employee" name="Employee">
+        <bpmn:flowNodeRef>Start_Submit</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_Submit</bpmn:flowNodeRef>
+      </bpmn:lane>
+      <bpmn:lane id="Lane_Manager" name="Manager">
+        <bpmn:flowNodeRef>Task_Review</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Gateway_Decision</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_Approve</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_Reject</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>End_Approved</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>End_Rejected</bpmn:flowNodeRef>
+      </bpmn:lane>
+    </bpmn:laneSet>
+
+    <bpmn:startEvent id="Start_Submit" name="Receipt collected"/>
+    <bpmn:userTask id="Task_Submit" name="Submit expense report"/>
+    <bpmn:userTask id="Task_Review" name="Review expense report"/>
+    <bpmn:exclusiveGateway id="Gateway_Decision" name="Within policy?"/>
+    <bpmn:userTask id="Task_Approve" name="Approve and forward to payroll"/>
+    <bpmn:userTask id="Task_Reject" name="Reject with reason"/>
+    <bpmn:endEvent id="End_Approved" name="Expense approved"/>
+    <bpmn:endEvent id="End_Rejected" name="Expense rejected"/>
+
+    <bpmn:sequenceFlow sourceRef="Start_Submit"     targetRef="Task_Submit"/>
+    <bpmn:sequenceFlow sourceRef="Task_Submit"      targetRef="Task_Review"/>
+    <bpmn:sequenceFlow sourceRef="Task_Review"      targetRef="Gateway_Decision"/>
+    <bpmn:sequenceFlow sourceRef="Gateway_Decision" targetRef="Task_Approve">
+      <bpmn:conditionExpression>${withinPolicy == true}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow sourceRef="Gateway_Decision" targetRef="Task_Reject">
+      <bpmn:conditionExpression>${withinPolicy == false}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow sourceRef="Task_Approve" targetRef="End_Approved"/>
+    <bpmn:sequenceFlow sourceRef="Task_Reject"  targetRef="End_Rejected"/>
+  </bpmn:process>
+</bpmn:definitions>
+```
+
+## Generated `specs.md`
+
+```markdown
+# Expense Approval
+
+> Technical specification generated from `expense-approval.bpmn`.
+> Source process id: `Process_Expense`
+
+## 1. Overview
+
+A two-lane workflow in which an employee submits an expense report and a
+manager reviews it against policy, resulting in either approval (forwarded
+to payroll) or rejection (returned with reason).
+
+## 2. Actors and roles
+
+- **Employee** — collects receipts and submits the expense report
+- **Manager** — reviews submissions and decides approval
+
+## 3. Triggers
+
+- **Receipt collected** (start event) — process begins when an employee has
+  receipts ready to submit
+
+## 4. Main flow (happy path)
+
+1. **Employee** submits the expense report.
+   <!-- from bpmn:userTask id="Task_Submit" -->
+2. **Manager** reviews the expense report.
+   <!-- from bpmn:userTask id="Task_Review" -->
+3. **Manager** evaluates the *Within policy?* gate.
+   <!-- from bpmn:exclusiveGateway id="Gateway_Decision" -->
+4. **Manager** approves and forwards the report to payroll.
+   <!-- from bpmn:userTask id="Task_Approve" -->
+5. Process ends in **Expense approved**.
+   <!-- from bpmn:endEvent id="End_Approved" -->
+
+## 5. Alternative flows
+
+### 5.1 Out of policy (after step 3)
+
+1. **Manager** rejects the report with a reason.
+2. Process ends in **Expense rejected**.
+
+## 6. Exception flows
+
+None defined in this diagram.
+
+## 7. Integration points
+
+None — this is a single-pool process.
+
+## 8. Data contracts
+
+The diagram does not declare data objects. The implicit payload is the
+expense report itself; its schema is not specified here.
+
+## 9. End states
+
+- **Expense approved** — happy path, report forwarded to payroll
+- **Expense rejected** — alternative path, report returned with reason
+
+## 10. Acceptance criteria
+
+- **Given** an employee has collected receipts,
+  **when** they submit an expense report and the manager finds it within policy,
+  **then** the process ends in **Expense approved** and the report is forwarded to payroll.
+- **Given** an employee has collected receipts,
+  **when** they submit an expense report and the manager finds it out of policy,
+  **then** the process ends in **Expense rejected** with a reason returned to the employee.
+
+## 11. Open questions
+
+- **Policy criteria are not specified.** The gateway labels its branches
+  as "within policy" / "out of policy" but does not define what the policy is.
+- **Expense report schema is not specified.** No data object is attached.
+- **What happens to the rejected report?** The flow ends, but it's not
+  clear whether the employee is notified or expected to resubmit.
+
+---
+
+*Generated by `bpmnemonic`. Re-run after diagram changes to keep this in sync.*
+```
+
+## Generated `prd.md`
+
+```markdown
+# PRD: Expense Approval
+
+> Generated from `expense-approval.bpmn`. This PRD describes the product
+> requirements for the Expense Approval workflow.
+
+## Problem statement
+
+Employees who have incurred reimbursable expenses need a reliable way to
+submit claims and receive a manager's decision. Today the criteria for
+approval and the path to payroll are not formalized; this workflow makes
+both explicit.
+
+## Users and stakeholders
+
+- **Employee** — submits expense reports for reimbursement
+- **Manager** — reviews submitted reports and decides whether to approve
+
+## Goals and outcomes
+
+- **Expense approved** — the expense report is forwarded to payroll for reimbursement
+- **Expense rejected** — the employee receives a clear reason and can choose to resubmit
+
+## User journey
+
+An employee collects receipts during a business trip. Back at the office,
+they submit the expense report through whatever interface this workflow
+provides. Their manager receives the submission, reviews it against company
+policy, and either approves it (forwarding to payroll) or rejects it with
+a reason that the employee can act on.
+
+## Edge cases and decision points
+
+- **Within policy?** — the manager judges whether the submitted expenses
+  comply with company expense policy. If yes, the report is approved and
+  forwarded to payroll. If no, the report is rejected with a reason.
+
+## Exception handling
+
+The diagram does not specify any exception handling — there are no
+timeouts on the manager's review, no escalation paths, no handling for
+incomplete submissions. These should be considered for the next iteration.
+
+## Dependencies
+
+- **Payroll system** — receives approved expense reports for reimbursement.
+  The handoff is implicit in this diagram and should be specified.
+
+## Success metrics
+
+- **Approval rate** — % of submitted reports that end in "Expense approved"
+- **Time to decision** — median time from submission to manager decision
+- **Resubmission rate** — % of rejected reports that get resubmitted
+
+## Out of scope / open questions
+
+- **What is "company policy"?** The gateway implies a policy exists but
+  doesn't define it. This needs to be a separate document or rule set.
+- **How is the employee notified?** Both end states are silent on
+  notification. The PM should clarify whether email, in-app, or other.
+- **Resubmission?** The diagram shows rejected as a terminal state. Is
+  there a path to fix and resubmit, or does the employee start over?
+
+---
+
+*Generated by `bpmnemonic`. The diagram is the source of truth — re-run this
+when the .bpmn file changes.*
+```
+
+## Notes
+
+The two outputs share the same skeleton but differ where it counts:
+
+- **Specs.md** lists policy criteria as a missing technical artifact ("not specified")
+- **PRD.md** flags the same gap as a product question ("how is the employee notified")
+
+Both end with open questions because the diagram is genuinely incomplete. **Honesty about gaps is more valuable than confident invention.**

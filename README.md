@@ -13,6 +13,7 @@ Inspired by [JuliusBrussee/caveman](https://github.com/JuliusBrussee/caveman) fo
 | [`seo-geo-audit`](seo-geo-audit/) | Audit a frontend codebase for classical SEO **and** GEO (Generative Engine Optimization — how easily LLMs can extract and cite your content) |
 | [`break-time`](break-time/) | Ambient skill that nudges you to take a break when you've been working too long; ships with a beginner-friendly hooks tutorial |
 | [`vibeasfunc`](vibeasfunc/) | **ViBeAsFunC** — translate legacy VBA (Excel macros, Word automation) into idiomatic functional C# (.NET 8+) following a 5-step playbook |
+| [`bpmnemonic`](bpmnemonic/) | Translate BPMN 2.0 process diagrams into readable specs.md or prd.md documents — happy paths, alternative flows, exception flows, and surfaced gaps |
 
 Each skill is self-contained — install only the ones you want by copying its folder to `~/.claude/skills/<name>/`.
 

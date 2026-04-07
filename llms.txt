@@ -1,6 +1,6 @@
 # claude-poetry-skill
 
-> A collection of small, opinionated Claude Code skills — covering poetic commit messages, LLM-friendly repo indexing, frontend SEO/GEO auditing, ambient break reminders, and VBA-to-functional-C# modernization.
+> A collection of small, opinionated Claude Code skills — covering poetic commit messages, LLM-friendly repo indexing, frontend SEO/GEO auditing, ambient break reminders, VBA-to-functional-C# modernization, and BPMN-to-markdown translation.
 
 This repository hosts source-of-truth files for several Claude Code skills. Each skill lives in its own folder and is activated by copying it into `~/.claude/skills/`. The skills share a common shape: a `SKILL.md` with frontmatter, supporting reference docs, and helper shell scripts. They are designed to be composed, not coupled — each one stands alone.
 
@@ -10,6 +10,7 @@ This repository hosts source-of-truth files for several Claude Code skills. Each
 - [seo-geo-audit](seo-geo-audit/SKILL.md): audit a frontend codebase for classical SEO and GEO (Generative Engine Optimization)
 - [break-time](break-time/SKILL.md): ambient nudge skill that uses a UserPromptSubmit hook to remind you to take breaks
 - [vibeasfunc](vibeasfunc/SKILL.md): translate legacy VBA into idiomatic functional C# (.NET 8+) following a 5-step playbook
+- [bpmnemonic](bpmnemonic/SKILL.md): translate BPMN 2.0 process diagrams into specs.md or prd.md documents
 
 ## Reference
 - [poet-commit forms](poet-commit/forms.md): syllable rules and structural notes for haiku, senryū, tanka, and renga
@@ -23,6 +24,10 @@ This repository hosts source-of-truth files for several Claude Code skills. Each
 - [vibeasfunc patterns](vibeasfunc/playbook/patterns.md): functional C# patterns to introduce during migration
 - [vibeasfunc Excel guidance](vibeasfunc/playbook/excel.md): COM interop vs ClosedXML vs EPPlus
 - [vibeasfunc pitfalls](vibeasfunc/playbook/pitfalls.md): common mistakes when translating VBA
+- [bpmnemonic elements](bpmnemonic/playbook/elements.md): BPMN element reference (tasks, events, gateways, flows)
+- [bpmnemonic extraction](bpmnemonic/playbook/extraction.md): how to read a .bpmn XML file
+- [bpmnemonic templates](bpmnemonic/playbook/templates.md): target structure for specs.md and prd.md output
+- [bpmnemonic pitfalls](bpmnemonic/playbook/pitfalls.md): common mistakes when narrating a process diagram
 
 ## Optional
 - [README](README.md): top-level project overview and installation
@@ -32,3 +37,6 @@ This repository hosts source-of-truth files for several Claude Code skills. Each
 - [vibeasfunc error example](vibeasfunc/examples/02-error-handling.md): On Error replaced with Result types
 - [vibeasfunc pipeline example](vibeasfunc/examples/03-excel-pipeline.md): full Excel macro rewritten functionally
 - [vibeasfunc string example](vibeasfunc/examples/04-string-parsing.md): VBA string surgery via pattern matching
+- [bpmnemonic approval example](bpmnemonic/examples/01-approval.md): simple expense approval BPMN translated to both spec and PRD
+- [bpmnemonic loan example](bpmnemonic/examples/02-loan.md): multi-pool loan application translated to a technical spec
+- [bpmnemonic errors example](bpmnemonic/examples/03-errors.md): order fulfillment with timer and error events
