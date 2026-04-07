@@ -56,6 +56,113 @@ Or just say "commit this as a haiku".
 
 See `poet-commit/SKILL.md` for the full spec.
 
+## Modality examples
+
+The same conceptual change — *fixing a retry loop that was hammering an API* — rendered through every modality the skill supports.
+
+### `/poet haiku` — default form, hybrid, grounded
+
+```
+fix(api): clamp retry backoff to 30s ceiling
+
+---
+
+exponential dusk
+the server, patient at last
+counts to thirty, sleeps
+```
+
+### `/poet senryu` — wry, human-flavored, hybrid
+
+```
+fix(api): stop hammering upstream on 429
+
+---
+
+we knocked ten times a second
+on a door already open
+no one was angry
+```
+
+### `/poet tanka` — five lines, emotional pivot, hybrid
+
+```
+refactor(api): centralize retry policy in one client
+
+---
+
+the cache, evicted
+keys we promised to remember
+gone with the morning
+we rewrite the contract twice
+hoping the readers forgive
+```
+
+### `/poet renga` — multi-stanza chain for big diffs, hybrid
+
+```
+chore(db): migrate sessions table to uuid pks
+
+---
+
+migrations advance
+the old column waves once more
+then disappears
+
+new tests bloom in rows
+patient as the morning sun
+green from end to end
+
+we close the branch, exhale
+the river finds its new bed
+```
+
+### `/poet pure` — poem-only commit message, no conventional prefix
+
+```
+the off-by-one bug
+hiding for two release cycles
+waves as it leaves
+```
+
+### `/poet free` — imaginative, ignores diff content
+
+```
+margins widen out
+where the cursor used to pause
+a reader arrives
+```
+
+### `/poet --no-commit` — print only, do not commit
+
+Same outputs as above, but the skill prints to the terminal and stops. Useful for drafting before staging.
+
+### `/poet --yolo` — chaos: random form, random mode, immediate commit
+
+```
+chore: things changed and the wind knew first
+
+---
+
+a flag flips at noon
+no one watching the dial
+the build turns over
+the reviewer sleeps in late
+the river finds a new stone
+```
+
+(That one happened to roll *tanka* + *free* + *pure*. Next run might be a renga grounded in the diff. The dice decide.)
+
+### Stop the skill
+
+> stop poet
+
+or
+
+> normal commits
+
+Disables poetry for the rest of the session — your next commit goes through with a plain conventional message.
+
 ## Future: ship as a plugin
 
 Once the skill stabilizes, drop a `plugin.json` next to `poet-commit/` and a marketplace manifest, and it can be installed via `/plugin install` instead of a manual copy. Same files, different shipping crate.

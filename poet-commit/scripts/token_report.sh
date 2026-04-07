@@ -50,12 +50,17 @@ fi
 JSONL="$(ls -t "$SESSION_DIR"/*.jsonl 2>/dev/null | head -n1)"
 [[ -n "$JSONL" && -f "$JSONL" ]] || fail "no session jsonl"
 
-# Pull the last usage block (greedy on the line, take last match in file)
-USAGE_LINE="$(grep -o '"usage":{[^}]*}' "$JSONL" | tail -n1)"
-[[ -n "$USAGE_LINE" ]] || fail "no usage block"
+# Take the last full JSONL line that contains "output_tokens" — that's the
+# completed usage record for the most recent assistant turn. Extracting from a
+# whole line (rather than a brace-delimited substring) avoids nested-object
+# truncation bugs when fields like "cache_creation":{...} appear before output.
+USAGE_LINE="$(grep '"output_tokens"' "$JSONL" | tail -n1)"
+[[ -n "$USAGE_LINE" ]] || fail "no usage line with output_tokens"
 
 extract() {
-  echo "$USAGE_LINE" | grep -o "\"$1\":[0-9]*" | head -n1 | cut -d: -f2
+  # Take the LAST occurrence on the line (avoids picking up nested counters
+  # like ephemeral_5m_input_tokens that share substring with input_tokens).
+  echo "$USAGE_LINE" | grep -o "\"$1\":[0-9]*" | tail -n1 | cut -d: -f2
 }
 
 IN="$(extract input_tokens)"
