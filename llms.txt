@@ -1,17 +1,25 @@
 # claude-poetry-skill
 
-> A collection of small, opinionated Claude Code skills — starting with poet-commit (poetic git commit messages) and llms-txt (LLM-friendly repo indexing).
+> A collection of small, opinionated Claude Code skills — covering poetic commit messages, LLM-friendly repo indexing, frontend SEO/GEO auditing, and ambient break reminders.
 
 This repository hosts source-of-truth files for several Claude Code skills. Each skill lives in its own folder and is activated by copying it into `~/.claude/skills/`. The skills share a common shape: a `SKILL.md` with frontmatter, supporting reference docs, and helper shell scripts. They are designed to be composed, not coupled — each one stands alone.
 
 ## Skills
 - [poet-commit](poet-commit/SKILL.md): turn git commits into haiku, senryū, tanka, or renga, grounded in the diff or freely imagined
 - [llms-txt](llms-txt/SKILL.md): generate or update an llms.txt index file at the root of any repo, following the llmstxt.org spec
+- [seo-geo-audit](seo-geo-audit/SKILL.md): audit a frontend codebase for classical SEO and GEO (Generative Engine Optimization)
+- [break-time](break-time/SKILL.md): ambient nudge skill that uses a UserPromptSubmit hook to remind you to take breaks
 
 ## Reference
 - [poet-commit forms](poet-commit/forms.md): syllable rules and structural notes for haiku, senryū, tanka, and renga
 - [poet-commit examples](poet-commit/examples.md): curated good and bad poetic commits
 - [llms-txt format](llms-txt/format.md): distilled llmstxt.org format reference
+- [seo-geo-audit SEO checks](seo-geo-audit/checks/seo.md): classical SEO checklist with severities
+- [seo-geo-audit GEO checks](seo-geo-audit/checks/geo.md): the novel Generative Engine Optimization checklist
+- [seo-geo-audit scoring](seo-geo-audit/checks/scoring.md): how findings map to a letter grade
+- [break-time hooks tutorial](break-time/HOOKS-101.md): standalone beginner guide to writing Claude Code hooks
 
 ## Optional
-- [README](README.md): top-level project overview, install instructions, and modality examples
+- [README](README.md): top-level project overview and installation
+- [seo-geo-audit good example](seo-geo-audit/examples/good-site-report.md): example report on a well-optimized site
+- [seo-geo-audit bad example](seo-geo-audit/examples/bad-site-report.md): example report on a typical greenfield site

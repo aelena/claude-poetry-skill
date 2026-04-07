@@ -1,10 +1,25 @@
 # claude-poetry-skill
 
-A Claude Code skill that turns `git commit` into a small piece of poetry — haiku, senryū, tanka, or renga — either grounded in the actual diff or freely imagined.
+A small collection of opinionated Claude Code skills. The repo started with `poet-commit` (poetic git commit messages) and grew into a family of focused, drop-in skills that share a common shape: a `SKILL.md` with frontmatter, supporting reference docs, and helper shell scripts.
 
 Inspired by [JuliusBrussee/caveman](https://github.com/JuliusBrussee/caveman) for its invocation/stop pattern.
 
-## What it does
+## Skills in this repo
+
+| Skill | What it does |
+|---|---|
+| [`poet-commit`](poet-commit/) | Turn git commit messages into haiku, senryū, tanka, or renga — grounded in the diff or freely imagined |
+| [`llms-txt`](llms-txt/) | Generate an `llms.txt` index file at the root of any repo, following the [llmstxt.org](https://llmstxt.org) spec |
+| [`seo-geo-audit`](seo-geo-audit/) | Audit a frontend codebase for classical SEO **and** GEO (Generative Engine Optimization — how easily LLMs can extract and cite your content) |
+| [`break-time`](break-time/) | Ambient skill that nudges you to take a break when you've been working too long; ships with a beginner-friendly hooks tutorial |
+
+Each skill is self-contained — install only the ones you want by copying its folder to `~/.claude/skills/<name>/`.
+
+## Featured: poet-commit
+
+The rest of this README focuses on `poet-commit`, the original skill. See each subfolder's own `SKILL.md` and `README.md` for the others.
+
+### What it does
 
 - Reads the staged diff and summarizes it.
 - Picks a poetic form automatically by file count (1 → haiku, 2–4 → tanka, 5+ → renga), or uses the form you ask for.
