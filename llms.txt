@@ -1,0 +1,17 @@
+# claude-poetry-skill
+
+> A collection of small, opinionated Claude Code skills — starting with poet-commit (poetic git commit messages) and llms-txt (LLM-friendly repo indexing).
+
+This repository hosts source-of-truth files for several Claude Code skills. Each skill lives in its own folder and is activated by copying it into `~/.claude/skills/`. The skills share a common shape: a `SKILL.md` with frontmatter, supporting reference docs, and helper shell scripts. They are designed to be composed, not coupled — each one stands alone.
+
+## Skills
+- [poet-commit](poet-commit/SKILL.md): turn git commits into haiku, senryū, tanka, or renga, grounded in the diff or freely imagined
+- [llms-txt](llms-txt/SKILL.md): generate or update an llms.txt index file at the root of any repo, following the llmstxt.org spec
+
+## Reference
+- [poet-commit forms](poet-commit/forms.md): syllable rules and structural notes for haiku, senryū, tanka, and renga
+- [poet-commit examples](poet-commit/examples.md): curated good and bad poetic commits
+- [llms-txt format](llms-txt/format.md): distilled llmstxt.org format reference
+
+## Optional
+- [README](README.md): top-level project overview, install instructions, and modality examples
