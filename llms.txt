@@ -1,6 +1,6 @@
 # claude-poetry-skill
 
-> A collection of small, opinionated Claude Code skills — covering poetic commit messages, LLM-friendly repo indexing, frontend SEO/GEO auditing, and ambient break reminders.
+> A collection of small, opinionated Claude Code skills — covering poetic commit messages, LLM-friendly repo indexing, frontend SEO/GEO auditing, ambient break reminders, and VBA-to-functional-C# modernization.
 
 This repository hosts source-of-truth files for several Claude Code skills. Each skill lives in its own folder and is activated by copying it into `~/.claude/skills/`. The skills share a common shape: a `SKILL.md` with frontmatter, supporting reference docs, and helper shell scripts. They are designed to be composed, not coupled — each one stands alone.
 
@@ -9,6 +9,7 @@ This repository hosts source-of-truth files for several Claude Code skills. Each
 - [llms-txt](llms-txt/SKILL.md): generate or update an llms.txt index file at the root of any repo, following the llmstxt.org spec
 - [seo-geo-audit](seo-geo-audit/SKILL.md): audit a frontend codebase for classical SEO and GEO (Generative Engine Optimization)
 - [break-time](break-time/SKILL.md): ambient nudge skill that uses a UserPromptSubmit hook to remind you to take breaks
+- [vibeasfunc](vibeasfunc/SKILL.md): translate legacy VBA into idiomatic functional C# (.NET 8+) following a 5-step playbook
 
 ## Reference
 - [poet-commit forms](poet-commit/forms.md): syllable rules and structural notes for haiku, senryū, tanka, and renga
@@ -18,8 +19,16 @@ This repository hosts source-of-truth files for several Claude Code skills. Each
 - [seo-geo-audit GEO checks](seo-geo-audit/checks/geo.md): the novel Generative Engine Optimization checklist
 - [seo-geo-audit scoring](seo-geo-audit/checks/scoring.md): how findings map to a letter grade
 - [break-time hooks tutorial](break-time/HOOKS-101.md): standalone beginner guide to writing Claude Code hooks
+- [vibeasfunc constructs](vibeasfunc/playbook/constructs.md): VBA → functional C# construct mapping table
+- [vibeasfunc patterns](vibeasfunc/playbook/patterns.md): functional C# patterns to introduce during migration
+- [vibeasfunc Excel guidance](vibeasfunc/playbook/excel.md): COM interop vs ClosedXML vs EPPlus
+- [vibeasfunc pitfalls](vibeasfunc/playbook/pitfalls.md): common mistakes when translating VBA
 
 ## Optional
 - [README](README.md): top-level project overview and installation
 - [seo-geo-audit good example](seo-geo-audit/examples/good-site-report.md): example report on a well-optimized site
 - [seo-geo-audit bad example](seo-geo-audit/examples/bad-site-report.md): example report on a typical greenfield site
+- [vibeasfunc loop example](vibeasfunc/examples/01-simple-loop.md): VBA For loop translated to LINQ
+- [vibeasfunc error example](vibeasfunc/examples/02-error-handling.md): On Error replaced with Result types
+- [vibeasfunc pipeline example](vibeasfunc/examples/03-excel-pipeline.md): full Excel macro rewritten functionally
+- [vibeasfunc string example](vibeasfunc/examples/04-string-parsing.md): VBA string surgery via pattern matching

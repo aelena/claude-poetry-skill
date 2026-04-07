@@ -12,6 +12,7 @@ Inspired by [JuliusBrussee/caveman](https://github.com/JuliusBrussee/caveman) fo
 | [`llms-txt`](llms-txt/) | Generate an `llms.txt` index file at the root of any repo, following the [llmstxt.org](https://llmstxt.org) spec |
 | [`seo-geo-audit`](seo-geo-audit/) | Audit a frontend codebase for classical SEO **and** GEO (Generative Engine Optimization — how easily LLMs can extract and cite your content) |
 | [`break-time`](break-time/) | Ambient skill that nudges you to take a break when you've been working too long; ships with a beginner-friendly hooks tutorial |
+| [`vibeasfunc`](vibeasfunc/) | **ViBeAsFunC** — translate legacy VBA (Excel macros, Word automation) into idiomatic functional C# (.NET 8+) following a 5-step playbook |
 
 Each skill is self-contained — install only the ones you want by copying its folder to `~/.claude/skills/<name>/`.
 
