@@ -1,27 +1,10 @@
 # claude-poetry-skill
 
-A small collection of opinionated Claude Code skills. The repo started with `poet-commit` (poetic git commit messages) and grew into a family of focused, drop-in skills that share a common shape: a `SKILL.md` with frontmatter, supporting reference docs, and helper shell scripts.
+A Claude Code skill that turns `git commit` into a small piece of poetry — haiku, senryū, tanka, or renga — either grounded in the actual diff or freely imagined.
 
 Inspired by [JuliusBrussee/caveman](https://github.com/JuliusBrussee/caveman) for its invocation/stop pattern.
 
-## Skills in this repo
-
-| Skill | What it does |
-|---|---|
-| [`poet-commit`](poet-commit/) | Turn git commit messages into haiku, senryū, tanka, or renga — grounded in the diff or freely imagined |
-| [`llms-txt`](llms-txt/) | Generate an `llms.txt` index file at the root of any repo, following the [llmstxt.org](https://llmstxt.org) spec |
-| [`seo-geo-audit`](seo-geo-audit/) | Audit a frontend codebase for classical SEO **and** GEO (Generative Engine Optimization — how easily LLMs can extract and cite your content) |
-| [`break-time`](break-time/) | Ambient skill that nudges you to take a break when you've been working too long; ships with a beginner-friendly hooks tutorial |
-| [`vibeasfunc`](vibeasfunc/) | **ViBeAsFunC** — translate legacy VBA (Excel macros, Word automation) into idiomatic functional C# (.NET 8+) following a 5-step playbook |
-| [`bpmnemonic`](bpmnemonic/) | Translate BPMN 2.0 process diagrams into readable specs.md or prd.md documents — happy paths, alternative flows, exception flows, and surfaced gaps |
-
-Each skill is self-contained — install only the ones you want by copying its folder to `~/.claude/skills/<name>/`.
-
-## Featured: poet-commit
-
-The rest of this README focuses on `poet-commit`, the original skill. See each subfolder's own `SKILL.md` and `README.md` for the others.
-
-### What it does
+## What it does
 
 - Reads the staged diff and summarizes it.
 - Picks a poetic form automatically by file count (1 → haiku, 2–4 → tanka, 5+ → renga), or uses the form you ask for.
@@ -190,3 +173,13 @@ Once the skill stabilizes, drop a `plugin.json` next to `poet-commit/` and a mar
 - Refuses to commit when nothing is staged.
 - Sniffs for secrets in the diff (`.env`, keys, credentials, tokens) and falls back to a plain conventional message if found.
 - `--yolo` randomizes the *poem*, not git safety.
+
+## Sibling skills
+
+This repo started as a multi-skill collection and was later split — each skill now lives in its own repo as a sibling under `claude-skills/`:
+
+- [llms-txt](../llms-txt) — generate llms.txt index files
+- [seo-geo-audit](../seo-geo-audit) — frontend SEO + GEO auditing
+- [break-time](../break-time) — ambient break reminders via hooks
+- [vibeasfunc](../vibeasfunc) — VBA → functional C# modernization
+- [bpmnemonic](../bpmnemonic) — BPMN → specs.md / prd.md translation
