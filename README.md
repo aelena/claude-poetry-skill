@@ -1,6 +1,6 @@
 # claude-poetry-skill
 
-A Claude Code skill that turns `git commit` into a small piece of poetry — haiku, senryū, tanka, or renga — either grounded in the actual diff or freely imagined.
+A [Claude Code](https://docs.anthropic.com/en/docs/claude-code) skill that turns `git commit` into a small piece of poetry — haiku, senryu, tanka, or renga — either grounded in the actual diff or freely imagined.
 
 Inspired by [JuliusBrussee/caveman](https://github.com/JuliusBrussee/caveman) for its invocation/stop pattern.
 
@@ -25,13 +25,14 @@ poet-commit/
     └── token_report.sh  ← extracts token usage from session JSONL
 ```
 
-## Install (as a skill)
+## Install
 
-This repo is the **source of truth**. To activate the skill, copy the `poet-commit/` folder into your Claude skills directory:
+Copy the `poet-commit/` folder into your Claude Code skills directory:
 
 ```bash
-# from this repo
 cp -r poet-commit ~/.claude/skills/poet-commit
+# or clone and copy:
+git clone https://github.com/aelena/claude-poetry-skill && cp -r claude-poetry-skill/poet-commit ~/.claude/skills/poet-commit
 ```
 
 Then in any Claude Code session, invoke:
@@ -46,12 +47,12 @@ Or just say "commit this as a haiku".
 
 | You say | What happens |
 |---|---|
-| `/poet` | Auto-form, hybrid, grounded, preview before commit |
-| `/poet haiku` · `senryu` · `tanka` · `renga` | Force a form |
-| `/poet pure` | Poem-only commit message |
-| `/poet free` | Imaginative, ignore diff content |
-| `/poet --no-commit` | Print poem only |
-| `/poet --yolo` | Random everything, commit immediately |
+| `/poet-commit` | Auto-form, hybrid, grounded, preview before commit |
+| `/poet-commit haiku` · `senryu` · `tanka` · `renga` | Force a form |
+| `/poet-commit pure` | Poem-only commit message |
+| `/poet-commit free` | Imaginative, ignore diff content |
+| `/poet-commit --no-commit` | Print poem only |
+| `/poet-commit --yolo` | Random everything, commit immediately |
 | "stop poet" / "normal commits" | Disable for the session |
 
 See `poet-commit/SKILL.md` for the full spec.
@@ -60,7 +61,7 @@ See `poet-commit/SKILL.md` for the full spec.
 
 The same conceptual change — *fixing a retry loop that was hammering an API* — rendered through every modality the skill supports.
 
-### `/poet haiku` — default form, hybrid, grounded
+### `/poet-commit haiku` — default form, hybrid, grounded
 
 ```
 fix(api): clamp retry backoff to 30s ceiling
@@ -72,7 +73,7 @@ the server, patient at last
 counts to thirty, sleeps
 ```
 
-### `/poet senryu` — wry, human-flavored, hybrid
+### `/poet-commit senryu` — wry, human-flavored, hybrid
 
 ```
 fix(api): stop hammering upstream on 429
@@ -84,7 +85,7 @@ on a door already open
 no one was angry
 ```
 
-### `/poet tanka` — five lines, emotional pivot, hybrid
+### `/poet-commit tanka` — five lines, emotional pivot, hybrid
 
 ```
 refactor(api): centralize retry policy in one client
@@ -98,7 +99,7 @@ we rewrite the contract twice
 hoping the readers forgive
 ```
 
-### `/poet renga` — multi-stanza chain for big diffs, hybrid
+### `/poet-commit renga` — multi-stanza chain for big diffs, hybrid
 
 ```
 chore(db): migrate sessions table to uuid pks
@@ -117,7 +118,7 @@ we close the branch, exhale
 the river finds its new bed
 ```
 
-### `/poet pure` — poem-only commit message, no conventional prefix
+### `/poet-commit pure` — poem-only commit message, no conventional prefix
 
 ```
 the off-by-one bug
@@ -125,7 +126,7 @@ hiding for two release cycles
 waves as it leaves
 ```
 
-### `/poet free` — imaginative, ignores diff content
+### `/poet-commit free` — imaginative, ignores diff content
 
 ```
 margins widen out
@@ -133,11 +134,11 @@ where the cursor used to pause
 a reader arrives
 ```
 
-### `/poet --no-commit` — print only, do not commit
+### `/poet-commit --no-commit` — print only, do not commit
 
 Same outputs as above, but the skill prints to the terminal and stops. Useful for drafting before staging.
 
-### `/poet --yolo` — chaos: random form, random mode, immediate commit
+### `/poet-commit --yolo` — chaos: random form, random mode, immediate commit
 
 ```
 chore: things changed and the wind knew first
@@ -163,10 +164,6 @@ or
 
 Disables poetry for the rest of the session — your next commit goes through with a plain conventional message.
 
-## Future: ship as a plugin
-
-Once the skill stabilizes, drop a `plugin.json` next to `poet-commit/` and a marketplace manifest, and it can be installed via `/plugin install` instead of a manual copy. Same files, different shipping crate.
-
 ## Safety
 
 - Never `--no-verify`, never `--amend`, never `git push`.
@@ -174,12 +171,13 @@ Once the skill stabilizes, drop a `plugin.json` next to `poet-commit/` and a mar
 - Sniffs for secrets in the diff (`.env`, keys, credentials, tokens) and falls back to a plain conventional message if found.
 - `--yolo` randomizes the *poem*, not git safety.
 
-## Sibling skills
+## Related skills
 
-This repo started as a multi-skill collection and was later split — each skill now lives in its own repo as a sibling under `claude-skills/`:
+Part of a family of small, opinionated Claude Code skills:
 
-- [llms-txt](../llms-txt) — generate llms.txt index files
-- [seo-geo-audit](../seo-geo-audit) — frontend SEO + GEO auditing
-- [break-time](../break-time) — ambient break reminders via hooks
-- [vibeasfunc](../vibeasfunc) — VBA → functional C# modernization
-- [bpmnemonic](../bpmnemonic) — BPMN → specs.md / prd.md translation
+- [llms-txt](https://github.com/aelena/llms-txt) — generate llms.txt index files
+- [seo-geo-audit](https://github.com/aelena/seo-geo-audit) — frontend SEO + GEO auditing
+- [break-time](https://github.com/aelena/break-time) — ambient break reminders via hooks
+- [vibeasfunc](https://github.com/aelena/vibeasfunc) — VBA → functional C# modernization
+- [bpmnemonic](https://github.com/aelena/bpmnemonic) — BPMN → specs.md / prd.md translation
+- [repo-badges](https://github.com/aelena/repo-badges) — auto-detect toolchain and insert shields.io badges
