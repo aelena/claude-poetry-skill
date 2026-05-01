@@ -1,5 +1,15 @@
 # claude-poetry-skill
 
+<!-- badges-start -->
+[![Built for Claude Code](https://img.shields.io/badge/Built%20for-Claude%20Code-d97757?style=flat&logo=anthropic&logoColor=white)](https://docs.anthropic.com/en/docs/claude-code)
+[![License: MIT](https://img.shields.io/github/license/aelena/claude-poetry-skill?style=flat)](https://github.com/aelena/claude-poetry-skill/blob/main/LICENSE)
+[![Last commit](https://img.shields.io/github/last-commit/aelena/claude-poetry-skill?style=flat)](https://github.com/aelena/claude-poetry-skill/commits/main)
+[![Repo size](https://img.shields.io/github/repo-size/aelena/claude-poetry-skill?style=flat)](https://github.com/aelena/claude-poetry-skill)
+[![Stars](https://img.shields.io/github/stars/aelena/claude-poetry-skill?style=flat)](https://github.com/aelena/claude-poetry-skill/stargazers)
+[![Forks](https://img.shields.io/github/forks/aelena/claude-poetry-skill?style=flat)](https://github.com/aelena/claude-poetry-skill/network/members)
+[![Issues](https://img.shields.io/github/issues/aelena/claude-poetry-skill?style=flat)](https://github.com/aelena/claude-poetry-skill/issues)
+<!-- badges-end -->
+
 A [Claude Code](https://docs.anthropic.com/en/docs/claude-code) skill that turns `git commit` into a small piece of poetry — haiku, senryu, tanka, or renga — either grounded in the actual diff or freely imagined.
 
 Inspired by [JuliusBrussee/caveman](https://github.com/JuliusBrussee/caveman) for its invocation/stop pattern.
